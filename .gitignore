@@ -1,0 +1,29 @@
+# ignore R scripts
+.Rproj.user
+.RData
+.Rhistory
+openeo.Rproj
+*.R
+
+# ignore text/doc documentation/instructions
+*.docx
+*.doc
+instructions.txt
+
+# ignore deprecated Notebooks and python scripts
+wqi_20.02.2025.ipynb
+wqi_2024.ipynb
+test.py
+
+# ignore auxiliary input data
+data/input/berlin_lakes_polygons
+data/input/proc_lakes.py
+data/input/features_concat.csv
+
+# config (authentication)
+config.yaml
+
+.ipynb_checkpoints
+.Trash-0
+
+utils/__pycache__

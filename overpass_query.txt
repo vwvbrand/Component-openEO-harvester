@@ -1,0 +1,14 @@
+# query to fetch lakes
+
+[out:json]
+[maxsize:1073741824]
+[timeout:9000]
+
+[bbox:{{bbox}}];
+(
+  nwr ["type"="multipolygon"]["water"~"lake|basin|reservoir|pond"];
+);
+(._;>;);
+out;
+
+# extrafilter - place IS NULL and water IS NOT NULL

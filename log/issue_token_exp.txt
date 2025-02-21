@@ -1,0 +1,252 @@
+---------------------------------------------------------------------------
+RemoteDisconnected                        Traceback (most recent call last)
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connectionpool.py:789, in HTTPConnectionPool.urlopen(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)
+    788 # Make the request on the HTTPConnection object
+--> 789 response = self._make_request(
+    790     conn,
+    791     method,
+    792     url,
+    793     timeout=timeout_obj,
+    794     body=body,
+    795     headers=headers,
+    796     chunked=chunked,
+    797     retries=retries,
+    798     response_conn=response_conn,
+    799     preload_content=preload_content,
+    800     decode_content=decode_content,
+    801     **response_kw,
+    802 )
+    804 # Everything went great!
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connectionpool.py:536, in HTTPConnectionPool._make_request(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)
+    535 try:
+--> 536     response = conn.getresponse()
+    537 except (BaseSSLError, OSError) as e:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connection.py:507, in HTTPConnection.getresponse(self)
+    506 # Get the response from http.client.HTTPConnection
+--> 507 httplib_response = super().getresponse()
+    509 try:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:1377, in HTTPConnection.getresponse(self)
+   1376 try:
+-> 1377     response.begin()
+   1378 except ConnectionError:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:320, in HTTPResponse.begin(self)
+    319 while True:
+--> 320     version, status, reason = self._read_status()
+    321     if status != CONTINUE:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:289, in HTTPResponse._read_status(self)
+    286 if not line:
+    287     # Presumably, the server closed the connection before
+    288     # sending a valid response.
+--> 289     raise RemoteDisconnected("Remote end closed connection without"
+    290                              " response")
+    291 try:
+
+RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+ProtocolError                             Traceback (most recent call last)
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\requests\adapters.py:667, in HTTPAdapter.send(self, request, stream, timeout, verify, cert, proxies)
+    666 try:
+--> 667     resp = conn.urlopen(
+    668         method=request.method,
+    669         url=url,
+    670         body=request.body,
+    671         headers=request.headers,
+    672         redirect=False,
+    673         assert_same_host=False,
+    674         preload_content=False,
+    675         decode_content=False,
+    676         retries=self.max_retries,
+    677         timeout=timeout,
+    678         chunked=chunked,
+    679     )
+    681 except (ProtocolError, OSError) as err:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connectionpool.py:843, in HTTPConnectionPool.urlopen(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)
+    841     new_e = ProtocolError("Connection aborted.", new_e)
+--> 843 retries = retries.increment(
+    844     method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    845 )
+    846 retries.sleep()
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\util\retry.py:474, in Retry.increment(self, method, url, response, error, _pool, _stacktrace)
+    473 if read is False or method is None or not self._is_method_retryable(method):
+--> 474     raise reraise(type(error), error, _stacktrace)
+    475 elif read is not None:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\util\util.py:38, in reraise(tp, value, tb)
+     37 if value.__traceback__ is not tb:
+---> 38     raise value.with_traceback(tb)
+     39 raise value
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connectionpool.py:789, in HTTPConnectionPool.urlopen(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)
+    788 # Make the request on the HTTPConnection object
+--> 789 response = self._make_request(
+    790     conn,
+    791     method,
+    792     url,
+    793     timeout=timeout_obj,
+    794     body=body,
+    795     headers=headers,
+    796     chunked=chunked,
+    797     retries=retries,
+    798     response_conn=response_conn,
+    799     preload_content=preload_content,
+    800     decode_content=decode_content,
+    801     **response_kw,
+    802 )
+    804 # Everything went great!
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connectionpool.py:536, in HTTPConnectionPool._make_request(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)
+    535 try:
+--> 536     response = conn.getresponse()
+    537 except (BaseSSLError, OSError) as e:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\urllib3\connection.py:507, in HTTPConnection.getresponse(self)
+    506 # Get the response from http.client.HTTPConnection
+--> 507 httplib_response = super().getresponse()
+    509 try:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:1377, in HTTPConnection.getresponse(self)
+   1376 try:
+-> 1377     response.begin()
+   1378 except ConnectionError:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:320, in HTTPResponse.begin(self)
+    319 while True:
+--> 320     version, status, reason = self._read_status()
+    321     if status != CONTINUE:
+
+File c:\Users\Vit\.conda\envs\myenv\lib\http\client.py:289, in HTTPResponse._read_status(self)
+    286 if not line:
+    287     # Presumably, the server closed the connection before
+    288     # sending a valid response.
+--> 289     raise RemoteDisconnected("Remote end closed connection without"
+    290                              " response")
+    291 try:
+
+ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+ConnectionError                           Traceback (most recent call last)
+Cell In[39], line 1
+----> 1 s2 \
+      2     .filter_temporal(seasonal_extent) \
+      3     .download("output_tif_test.tif", format="GTiff", validate=True)
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\datacube.py:2364, in DataCube.download(self, outputfile, format, options, validate, auto_add_save_result, additional, job_options)
+   2355 if auto_add_save_result:
+   2356     cube = _ensure_save_result(
+   2357         cube=cube,
+   2358         format=format,
+   (...)
+   2362         method="DataCube.download()",
+   2363     )
+-> 2364 return self._connection.download(
+   2365     cube.flat_graph(), outputfile, validate=validate, additional=additional, job_options=job_options
+   2366 )
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\connection.py:1774, in Connection.download(self, graph, outputfile, timeout, validate, chunk_size, additional, job_options)
+   1770 pg_with_metadata = self._build_request_with_process_graph(
+   1771     process_graph=graph, additional=additional, job_options=job_options
+   1772 )
+   1773 self._preflight_validation(pg_with_metadata=pg_with_metadata, validate=validate)
+-> 1774 response = self.post(
+   1775     path="/result",
+   1776     json=pg_with_metadata,
+   1777     expected_status=200,
+   1778     stream=True,
+   1779     timeout=timeout or DEFAULT_TIMEOUT_SYNCHRONOUS_EXECUTE,
+   1780 )
+   1782 if outputfile is not None:
+   1783     target = Path(outputfile)
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\connection.py:282, in RestApiConnection.post(self, path, json, **kwargs)
+    274 def post(self, path: str, json: Optional[dict] = None, **kwargs) -> Response:
+    275     """
+    276     Do POST request to REST API.
+    277 
+   (...)
+    280     :return: response: Response
+    281     """
+--> 282     return self.request("post", path=path, json=json, allow_redirects=False, **kwargs)
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\connection.py:868, in Connection.request(self, method, path, headers, auth, check_error, expected_status, **kwargs)
+    861     return super(Connection, self).request(
+    862         method=method, path=path, headers=headers, auth=auth,
+    863         check_error=check_error, expected_status=expected_status, **kwargs,
+    864     )
+    866 try:
+    867     # Initial request attempt
+--> 868     return _request()
+    869 except OpenEoApiError as api_exc:
+    870     if api_exc.http_status_code in {401, 403} and api_exc.code == "TokenInvalid":
+    871         # Auth token expired: can we refresh?
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\connection.py:861, in Connection.request.<locals>._request()
+    860 def _request():
+--> 861     return super(Connection, self).request(
+    862         method=method, path=path, headers=headers, auth=auth,
+    863         check_error=check_error, expected_status=expected_status, **kwargs,
+    864     )
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\openeo\rest\connection.py:189, in RestApiConnection.request(self, method, path, params, headers, auth, check_error, expected_status, **kwargs)
+    178     _log.debug(
+    179         "Request `{m} {u}` with params {p}, headers {h}, auth {a}, kwargs {k}".format(
+    180             m=method.upper(),
+   (...)
+    186         )
+    187     )
+    188 with ContextTimer() as timer:
+--> 189     resp = self.session.request(
+    190         method=method,
+    191         url=url,
+    192         params=params,
+    193         headers=self._merged_headers(headers),
+    194         auth=auth,
+    195         timeout=kwargs.pop("timeout", self.default_timeout),
+    196         **kwargs
+    197     )
+    198 if slow_response_threshold and timer.elapsed() > slow_response_threshold:
+    199     _log.warning("Slow response: `{m} {u}` took {e:.2f}s (>{t:.2f}s)".format(
+    200         m=method.upper(), u=str_truncate(url, width=64),
+    201         e=timer.elapsed(), t=slow_response_threshold
+    202     ))
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\requests\sessions.py:589, in Session.request(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)
+    584 send_kwargs = {
+    585     "timeout": timeout,
+    586     "allow_redirects": allow_redirects,
+    587 }
+    588 send_kwargs.update(settings)
+--> 589 resp = self.send(prep, **send_kwargs)
+    591 return resp
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\requests\sessions.py:703, in Session.send(self, request, **kwargs)
+    700 start = preferred_clock()
+    702 # Send the request
+--> 703 r = adapter.send(request, **kwargs)
+    705 # Total elapsed time of the request (approximately)
+    706 elapsed = preferred_clock() - start
+
+File c:\Users\Vit\.conda\envs\myenv\lib\site-packages\requests\adapters.py:682, in HTTPAdapter.send(self, request, stream, timeout, verify, cert, proxies)
+    667     resp = conn.urlopen(
+    668         method=request.method,
+    669         url=url,
+   (...)
+    678         chunked=chunked,
+    679     )
+    681 except (ProtocolError, OSError) as err:
+--> 682     raise ConnectionError(err, request=request)
+    684 except MaxRetryError as e:
+    685     if isinstance(e.reason, ConnectTimeoutError):
+    686         # TODO: Remove this in 3.0.0: see #2811
+
+ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
